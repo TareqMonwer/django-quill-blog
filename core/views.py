@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from core.forms import CoreForm
 from core.models import Core
 
@@ -15,7 +15,7 @@ def home(request):
         ctx['form'] = form
         if form.is_valid:
             form.save()
-            return HttpResponse("Saved")
+            return redirect('/')
         else:
             return HttpResponse("data save failed")
     return render(request, 'post.html', ctx)
